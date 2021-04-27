@@ -25,5 +25,7 @@ namespace DarNGames.Pages.GameVendors
         {
             GameVendors = await _context.GameVendors.ToListAsync();
         }
+
+        
     }
 }

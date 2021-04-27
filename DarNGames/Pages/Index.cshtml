@@ -1,5 +1,6 @@
 ﻿@page
 @model IndexModel
+
 @{
     ViewData["Title"] = "Home page";
 }
@@ -8,3 +9,21 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<div class="container">
+
+    @foreach (var item in Model.GameVendors)
+    {
+        <div class="row">
+            <div class="col-md-4 col-sm-3">
+                @Html.DisplayFor(modelItem => item.VendorTitle)
+                <form method="post" action="VendorSubcategories?id=@item.Id"><button><img aria-label="VendorImageHomepage" class="img-fluid" src="@item.ImageLink" style="" /></button></form>
+            </div>
+            <div>
+                <a asp-page="gamevendors/Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="gamevendors/Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="gamevendors/Delete" asp-route-id="@item.Id">Delete</a>
+            </div>
+        </div>
+    };
+</div>
+

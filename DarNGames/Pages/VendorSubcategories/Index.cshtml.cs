@@ -10,6 +10,7 @@ using DarNGames.Models;
 
 namespace DarNGames.Pages.VendorSubcategories
 {
+    [BindProperties]
     public class IndexModel : PageModel
     {
         private readonly DarNGames.Data.DarNGamesContext _context;
@@ -21,9 +22,9 @@ namespace DarNGames.Pages.VendorSubcategories
 
         public IList<Models.VendorSubcategories> VendorSubcategories { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int id)
         {
-            VendorSubcategories = await _context.VendorSubcategories.ToListAsync();
+            VendorSubcategories = (from x in _context.VendorSubcategories where x.GameVendorId.Equals(id) select x).ToList();
         }
     }
 }

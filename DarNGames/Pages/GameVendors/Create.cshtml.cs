@@ -36,7 +36,7 @@ namespace DarNGames.Pages.GameVendors
                 return Page();
             }
 
-            _context.GameVendors.Add(GameVendors);
+            await _context.GameVendors.AddAsync(GameVendors);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
