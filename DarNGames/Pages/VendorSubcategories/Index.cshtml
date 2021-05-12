@@ -1,8 +1,9 @@
-﻿@page "{gameVendorId:int?}"
+﻿@page "{id}"
 @model DarNGames.Pages.VendorSubcategories.IndexModel
 
 @{
     ViewData["Title"] = "Index";
+    var vendorId = RouteData.Values["id"];
 }
 
 <h1>Index</h1>

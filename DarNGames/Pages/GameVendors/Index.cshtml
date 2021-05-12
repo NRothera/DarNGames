@@ -1,8 +1,10 @@
-﻿@page
+﻿@page "{id}"
+
 @model DarNGames.Pages.GameVendors.IndexModel
 
 @{
     ViewData["Title"] = "Index";
+    var vendorId = RouteData.Values["id"];
 }
 
 <h1>Index</h1>

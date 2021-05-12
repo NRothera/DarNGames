@@ -19,12 +19,13 @@ namespace DarNGames.Pages.VendorSubcategories
         {
             _context = context;
         }
-
+        public int Id { get; set; }
         public IList<Models.VendorSubcategories> VendorSubcategories { get;set; }
 
         public async Task OnGetAsync(int id)
         {
-            VendorSubcategories = (from x in _context.VendorSubcategories where x.GameVendorId.Equals(id) select x).ToList();
+            Id = id;
+            VendorSubcategories = (from x in _context.VendorSubcategories where x.GameVendorId.Equals(Id) select x).ToList();
         }
     }
 }
