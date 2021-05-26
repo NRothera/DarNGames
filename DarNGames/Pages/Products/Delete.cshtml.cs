@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DarNGames.Data;
 using DarNGames.Models;
 
-namespace DarNGames.Pages.Games
+namespace DarNGames.Pages.Products
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace DarNGames.Pages.Games
         }
 
         [BindProperty]
-        public CommonGameProperties CommonGameProperties { get; set; }
+        public DarNGames.Models.Products Products { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,9 +29,9 @@ namespace DarNGames.Pages.Games
                 return NotFound();
             }
 
-            CommonGameProperties = await _context.CommonGameProperties.FirstOrDefaultAsync(m => m.Id == id);
+            Products = await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (CommonGameProperties == null)
+            if (Products == null)
             {
                 return NotFound();
             }
@@ -45,15 +45,15 @@ namespace DarNGames.Pages.Games
                 return NotFound();
             }
 
-            CommonGameProperties = await _context.CommonGameProperties.FindAsync(id);
+            Products = await _context.Products.FindAsync(id);
 
-            if (CommonGameProperties != null)
+            if (Products != null)
             {
-                _context.CommonGameProperties.Remove(CommonGameProperties);
+                _context.Products.Remove(Products);
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index");
         }
     }
 }

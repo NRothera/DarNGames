@@ -12,6 +12,6 @@ namespace DarNGames.Models
         public string ImageLink { get; set; }
         public string Title { get; set; }
         public int GameVendorId { get; set; }
-        public List<CommonGameProperties> CommonGameProperties {get; set; }
+        public List<Products> CommonGameProperties {get; set; }
     }
 }

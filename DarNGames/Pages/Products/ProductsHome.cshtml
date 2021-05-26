@@ -1,0 +1,38 @@
+﻿@page "{id}/{gameVendorId}"
+@model DarNGames.Pages.Products.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+</p>
+<p>
+    <a asp-page="Create" asp-route-subcategoryId="@Model.Subcategory.Id" asp-route-gameVendorId="@Model.Subcategory.GameVendorId">Create New</a>
+</p>
+<div class="row">
+    <div class="col-md-4 col-sm-3">
+        <img src="@Url.Content("~/Images/VendorImages/" +  Model.Subcategory.ImageLink + ".jpg")" class="img-fluid" alt="Alternate Text" />
+    </div>
+</div>
+@foreach (var item in Model.Products)
+{
+<div class="row">
+    <div class="col-md-4 col-sm-3">
+        @Html.DisplayFor(modelItem => item.Title)
+        <img aria-label="VendorImageHomepage" class="img-fluid" src="@Url.Content("~/Images/SubcategoryImages/Random/" +  item.ImageLink + ".jpg")" style="" />
+        £@Html.DisplayFor(modelItem => item.Price)
+    </div>
+    <div class="col-md-4 col-sm-3">
+        @Html.DisplayFor(modelItem => item.Description);
+    </div>
+
+    <div>
+        <a asp-page="./Edit" asp-route-id="@item.Id"  asp-route-gameVendorId="@item.VendorSubcategoryId">Edit</a> |
+        <a asp-page="./Delete" asp-route-id="@item.Id" asp-route-gameVendorId="@item.VendorSubcategoryId">Delete</a>
+    </div>
+</div>
+
+}

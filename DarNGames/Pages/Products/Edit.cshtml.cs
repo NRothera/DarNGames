@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using DarNGames.Data;
 using DarNGames.Models;
 
-namespace DarNGames.Pages.Games
+namespace DarNGames.Pages.Products
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace DarNGames.Pages.Games
         }
 
         [BindProperty]
-        public CommonGameProperties CommonGameProperties { get; set; }
+        public DarNGames.Models.Products Products { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,9 +30,9 @@ namespace DarNGames.Pages.Games
                 return NotFound();
             }
 
-            CommonGameProperties = await _context.CommonGameProperties.FirstOrDefaultAsync(m => m.Id == id);
+            Products = await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (CommonGameProperties == null)
+            if (Products == null)
             {
                 return NotFound();
             }
@@ -48,7 +48,7 @@ namespace DarNGames.Pages.Games
                 return Page();
             }
 
-            _context.Attach(CommonGameProperties).State = EntityState.Modified;
+            _context.Attach(Products).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +56,7 @@ namespace DarNGames.Pages.Games
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CommonGamePropertiesExists(CommonGameProperties.Id))
+                if (!ProductsExists(Products.Id))
                 {
                     return NotFound();
                 }
@@ -69,9 +69,9 @@ namespace DarNGames.Pages.Games
             return RedirectToPage("./Index");
         }
 
-        private bool CommonGamePropertiesExists(int id)
+        private bool ProductsExists(int id)
         {
-            return _context.CommonGameProperties.Any(e => e.Id == id);
+            return _context.Products.Any(e => e.Id == id);
         }
     }
 }

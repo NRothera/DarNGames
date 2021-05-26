@@ -23,23 +23,26 @@ namespace DarNGames.Pages.VendorSubcategories
         {
             return Page();
         }
-
+        public int GameVendorId { get; set; }
         [BindProperty]
         public Models.VendorSubcategories VendorSubcategories { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int gameVendorId)
         {
+            GameVendorId = gameVendorId;
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+            VendorSubcategories.GameVendorId = GameVendorId;
 
             _context.VendorSubcategories.Add(VendorSubcategories);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return Redirect($"./{GameVendorId}");
         }
     }
 }

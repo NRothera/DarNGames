@@ -19,7 +19,7 @@ namespace DarNGames.Pages.GameVendors
             _context = context;
         }
 
-        public Models.GameVendors GameVendors { get; set; }
+        public Models.Vendors GameVendors { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

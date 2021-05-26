@@ -8,9 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using DarNGames.Data;
 using DarNGames.Models;
 
-namespace DarNGames.Pages.VendorSubcategories
+namespace DarNGames.Pages.Products
 {
-    [BindProperties]
     public class IndexModel : PageModel
     {
         private readonly DarNGames.Data.DarNGamesContext _context;
@@ -19,16 +18,18 @@ namespace DarNGames.Pages.VendorSubcategories
         {
             _context = context;
         }
-        public int Id { get; set; }
-        public VendorAndSubcategory VendorAndSubcategory { get; set; }
+        [BindProperty]
+        public IList<DarNGames.Models.Products> Products { get;set; }
 
         public async Task OnGetAsync(int id)
         {
-            Id = id;
-            VendorAndSubcategory = new VendorAndSubcategory();
+            Subcategory = new DarNGames.Models.VendorSubcategories();
 
-            VendorAndSubcategory.GameVendor =  (from g in _context.GameVendors where g.Id.Equals(id) select g).FirstOrDefault();
-            VendorAndSubcategory.VendorSubcategory = (from x in _context.VendorSubcategories where x.GameVendorId.Equals(Id) select x).ToList();
+            Subcategory = (from s in _context.VendorSubcategories where s.Id.Equals(id) select s).FirstOrDefault();
+            Products = (from x in _context.Products where x.VendorSubcategoryId.Equals(id) select x).ToList();
         }
+
+        public DarNGames.Models.VendorSubcategories Subcategory { get; set; }
+      
     }
 }

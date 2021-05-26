@@ -19,6 +19,7 @@ namespace DarNGames.Pages.VendorSubcategories
             _context = context;
         }
 
+        public int GameVendorId { get; set; }
         [BindProperty]
         public Models.VendorSubcategories VendorSubcategories { get; set; }
 
@@ -38,13 +39,14 @@ namespace DarNGames.Pages.VendorSubcategories
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int? id, int gameVendorId)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
+            GameVendorId = gameVendorId;
             VendorSubcategories = await _context.VendorSubcategories.FindAsync(id);
 
             if (VendorSubcategories != null)
@@ -53,7 +55,7 @@ namespace DarNGames.Pages.VendorSubcategories
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return Redirect($"./{GameVendorId}");
         }
     }
 }

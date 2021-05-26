@@ -21,7 +21,7 @@ namespace DarNGames.Pages.GameVendors
         }
 
         [BindProperty]
-        public Models.GameVendors GameVendors { get; set; }
+        public Models.Vendors GameVendors { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -66,7 +66,7 @@ namespace DarNGames.Pages.GameVendors
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Index");
         }
 
         private bool GameVendorsExists(int id)

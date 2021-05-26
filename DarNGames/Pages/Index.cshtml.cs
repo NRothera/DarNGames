@@ -22,16 +22,12 @@ namespace DarNGames.Pages
         public int VendorId { get; set; }
 
         [BindProperty]
-        public IList<Models.GameVendors> GameVendors { get; set; }
+        public IList<Models.Vendors> GameVendors { get; set; }
 
         public async Task OnGetAsync()
         {
             GameVendors = await _context.GameVendors.ToListAsync();
         }
-            
-        public IActionResult OnPost()
-        {
-            return RedirectToPage("vendorsubcategories", new { id = 1 });
-        }
+      
     }
 }

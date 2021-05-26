@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using DarNGames.Data;
 using DarNGames.Models;
 
-namespace DarNGames.Pages.Games
+namespace DarNGames.Pages.Products
 {
     public class CreateModel : PageModel
     {
@@ -23,23 +23,27 @@ namespace DarNGames.Pages.Games
         {
             return Page();
         }
-
+        
         [BindProperty]
-        public CommonGameProperties CommonGameProperties { get; set; }
+        public DarNGames.Models.Products Products { get; set; }
+        public int SubcategoryId { get; set; }
+        public Models.VendorSubcategories VendorSubcategory { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int subcategoryId, int gameVendorId)
         {
+            SubcategoryId = subcategoryId;
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
-            _context.CommonGameProperties.Add(CommonGameProperties);
+            Products.VendorSubcategoryId = SubcategoryId;
+            _context.Products.Add(Products);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage($"/ProductsHome", new { subcategoryId = SubcategoryId });
         }
     }
 }

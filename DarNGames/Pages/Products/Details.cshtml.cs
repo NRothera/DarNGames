@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DarNGames.Data;
 using DarNGames.Models;
 
-namespace DarNGames.Pages.Games
+namespace DarNGames.Pages.Products
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace DarNGames.Pages.Games
             _context = context;
         }
 
-        public CommonGameProperties CommonGameProperties { get; set; }
+        public DarNGames.Models.Products Products { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,9 +28,9 @@ namespace DarNGames.Pages.Games
                 return NotFound();
             }
 
-            CommonGameProperties = await _context.CommonGameProperties.FirstOrDefaultAsync(m => m.Id == id);
+            Products = await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (CommonGameProperties == null)
+            if (Products == null)
             {
                 return NotFound();
             }

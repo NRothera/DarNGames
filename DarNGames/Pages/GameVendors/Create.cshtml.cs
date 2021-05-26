@@ -25,7 +25,7 @@ namespace DarNGames.Pages.GameVendors
         }
 
         [BindProperty]
-        public Models.GameVendors GameVendors { get; set; }
+        public Models.Vendors GameVendors { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -36,10 +36,11 @@ namespace DarNGames.Pages.GameVendors
                 return Page();
             }
 
+
             await _context.GameVendors.AddAsync(GameVendors);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Index");
         }
     }
 }

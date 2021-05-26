@@ -3,47 +3,32 @@
 
 @{
     ViewData["Title"] = "Index";
-    var vendorId = RouteData.Values["id"];
 }
+<div class="row">
+    <div class="col-md-4 col-sm-3">
+        <h1>@Model.VendorAndSubcategory.GameVendor.VendorTitle</h1>
+    </div>
+  </div>
 
-<h1>Index</h1>
-
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.VendorSubcategories[0].ImageLink)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VendorSubcategories[0].Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VendorSubcategories[0].GameVendorId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.VendorSubcategories) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageLink)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GameVendorId)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <p>
+        <a asp-page="Create" asp-route-gameVendorId="@Model.VendorAndSubcategory.GameVendor.Id">Create New</a>
+    </p>
+        <div class="row">
+            <div class="col-md-4 col-sm-3">
+                <img src="@Url.Content("~/Images/VendorImages/" +  Model.VendorAndSubcategory.GameVendor.ImageLink + ".jpg")" class="img-fluid" alt="Alternate Text" />
+                </div>
+            </div>
+            @foreach (var item in Model.VendorAndSubcategory.VendorSubcategory)
+            {
+                <div class="row">
+                    <div class="col-md-4 col-sm-3">
+                        @Html.DisplayFor(modelItem => item.Title)
+                        <a asp-page="../products/ProductsHome" asp-route-id="@item.Id" asp-route-gameVendorId="@item.GameVendorId"><img aria-label="VendorImageHomepage" class="img-fluid" src="@Url.Content("~/Images/SubcategoryImages/" +  Model.VendorAndSubcategory.GameVendor.VendorTitle + "/"  + item.ImageLink + ".jpg")" style="" /></a>
+                    </div>
+                    <div>
+                        <a asp-page="./Edit" asp-route-id="@item.Id" asp-route-gameVendorId="@item.GameVendorId">Edit</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id" asp-route-gameVendorId="@item.GameVendorId">Delete</a>
+                    </div>
+                </div>
+                
+            }

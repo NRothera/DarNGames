@@ -10,18 +10,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DarNGames.Migrations
 {
     [DbContext(typeof(DarNGamesContext))]
-    [Migration("20210424142949_RemoveColumn")]
-    partial class RemoveColumn
+    [Migration("20210524195531_initialcreate")]
+    partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DarNGames.Models.CommonGameProperties", b =>
+            modelBuilder.Entity("DarNGames.Models.Products", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,6 +29,9 @@ namespace DarNGames.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageLink")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
@@ -47,22 +50,7 @@ namespace DarNGames.Migrations
 
                     b.HasIndex("VendorSubcategoriesId");
 
-                    b.ToTable("CommonGameProperties");
-                });
-
-            modelBuilder.Entity("DarNGames.Models.GameVendors", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("VendorTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GameVendors");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("DarNGames.Models.VendorSubcategories", b =>
@@ -75,9 +63,6 @@ namespace DarNGames.Migrations
                     b.Property<int>("GameVendorId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("GameVendorsId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ImageLink")
                         .HasColumnType("nvarchar(max)");
 
@@ -86,24 +71,35 @@ namespace DarNGames.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GameVendorsId");
-
                     b.ToTable("VendorSubcategories");
                 });
 
-            modelBuilder.Entity("DarNGames.Models.CommonGameProperties", b =>
+            modelBuilder.Entity("DarNGames.Models.Vendors", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImageLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VendorTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GameVendors");
+                });
+
+            modelBuilder.Entity("DarNGames.Models.Products", b =>
                 {
                     b.HasOne("DarNGames.Models.VendorSubcategories", null)
                         .WithMany("CommonGameProperties")
                         .HasForeignKey("VendorSubcategoriesId");
                 });
 
-            modelBuilder.Entity("DarNGames.Models.VendorSubcategories", b =>
-                {
-                    b.HasOne("DarNGames.Models.GameVendors", null)
-                        .WithMany("VendorSubcategories")
-                        .HasForeignKey("GameVendorsId");
-                });
+         
 #pragma warning restore 612, 618
         }
     }
