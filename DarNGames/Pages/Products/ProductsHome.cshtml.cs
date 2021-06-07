@@ -10,11 +10,11 @@ using DarNGames.Models;
 
 namespace DarNGames.Pages.Products
 {
-    public class IndexModel : PageModel
+    public class ProductsHome : PageModel
     {
         private readonly DarNGames.Data.DarNGamesContext _context;
 
-        public IndexModel(DarNGames.Data.DarNGamesContext context)
+        public ProductsHome(DarNGames.Data.DarNGamesContext context)
         {
             _context = context;
         }

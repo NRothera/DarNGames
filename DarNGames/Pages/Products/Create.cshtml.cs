@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DarNGames.Data;
 using DarNGames.Models;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.IO;
+using System.Web;
 
 namespace DarNGames.Pages.Products
 {
@@ -39,11 +43,14 @@ namespace DarNGames.Pages.Products
             {
                 return Page();
             }
+
+            Console.WriteLine(Products.ImageLink);
+
             Products.VendorSubcategoryId = SubcategoryId;
             _context.Products.Add(Products);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage($"/ProductsHome", new { subcategoryId = SubcategoryId });
+            return Redirect($"/Products/ProductsHome/{SubcategoryId}/{gameVendorId}");
         }
     }
 }

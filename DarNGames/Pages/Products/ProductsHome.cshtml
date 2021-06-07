@@ -1,8 +1,8 @@
 ﻿@page "{id}/{gameVendorId}"
-@model DarNGames.Pages.Products.IndexModel
+@model DarNGames.Pages.Products.ProductsHome
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Products Home";
 }
 
 <h1>Index</h1>
@@ -26,7 +26,7 @@
         £@Html.DisplayFor(modelItem => item.Price)
     </div>
     <div class="col-md-4 col-sm-3">
-        @Html.DisplayFor(modelItem => item.Description);
+        @Html.DisplayFor(modelItem => item.Description)
     </div>
 
     <div>

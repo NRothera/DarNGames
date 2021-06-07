@@ -66,7 +66,7 @@ namespace DarNGames.Pages.Products
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("ProductsHome");
         }
 
         private bool ProductsExists(int id)
