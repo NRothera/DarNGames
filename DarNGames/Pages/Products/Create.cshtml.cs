@@ -43,8 +43,31 @@ namespace DarNGames.Pages.Products
             {
                 return Page();
             }
+            var files = Request.Form.Files;
 
-            Console.WriteLine(Products.ImageLink);
+            var savePath = System.IO.Directory.GetCurrentDirectory() + "\\Data\\Nintento\\Test\\";
+            if (!System.IO.Directory.Exists(savePath))
+            {
+                Directory.CreateDirectory(savePath);
+            }
+
+            var size = files.Sum(f => f.Length);
+           foreach(var file in files)
+            {
+                string untrustedFileName = Path.GetRandomFileName();
+                var pathToCheck = savePath + untrustedFileName;
+
+                var filePath = Path.Combine(savePath, Path.GetRandomFileName());
+
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+            }
+
+           
+
 
             Products.VendorSubcategoryId = SubcategoryId;
             _context.Products.Add(Products);
@@ -52,5 +75,7 @@ namespace DarNGames.Pages.Products
 
             return Redirect($"/Products/ProductsHome/{SubcategoryId}/{gameVendorId}");
         }
+
+
     }
 }

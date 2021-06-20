@@ -37,8 +37,7 @@
                 <div class="drop_zone">
                     <span asp-validation-for="Products.ImageLink" class="text-danger"></span>
                     <span class="drop_zone__prompt">Drag/Drop images here</span>
-                    <input type="file" name="myFile" class="drop_zone__input"/>
-                    <input asp-for="Products.ImageLink" type="hidden" id="imageUpload" class="form-control"/>
+                    <input type="file" asp-for="Products.ImageLink" id="imageUpload "name="myFile" class="drop_zone__input form-control-file"/>
                 </div>
             </div>
 

@@ -65,9 +65,9 @@ function updateThumbnail(dropZoneElement, file) {
         reader.onload = () => {
             thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
             const dropZoneElement = document.getElementById("imageUpload");
-            reader.readAsText(file)
 
-            dropZoneElement.setAttribute('value', 'reader.result');
+            dropZoneElement.setAttribute('value', reader.result);
+            console.log(reader.result)
         };
     } else {
         thumbnailElement.style.backgroundImage = null;
