@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DarNGames.Data;
 using DarNGames.Models;
+using System.IO;
 
 namespace DarNGames.Pages.Products
 {
@@ -21,6 +22,9 @@ namespace DarNGames.Pages.Products
 
         [BindProperty]
         public DarNGames.Models.Products Products { get; set; }
+
+        public int SubcategoryId { get; set; }
+        public Models.VendorSubcategories VendorSubcategory { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -38,12 +42,18 @@ namespace DarNGames.Pages.Products
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int? id, int subcategoryId, int gameVendorId)
         {
             if (id == null)
             {
                 return NotFound();
             }
+
+            SubcategoryId = subcategoryId;
+
+            var filePath = _context.Products.Where(p => p.Id == id).FirstOrDefault().ImageLink;
+
+            System.IO.File.Delete(System.IO.Directory.GetCurrentDirectory() + "\\wwwroot\\" + filePath.Replace("%20", " "));
 
             Products = await _context.Products.FindAsync(id);
 
@@ -53,7 +63,7 @@ namespace DarNGames.Pages.Products
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("/Index");
+            return Redirect($"/Products/ProductsHome/{Products.VendorSubcategoryId}/{gameVendorId}");
         }
     }
 }

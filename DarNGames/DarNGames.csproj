@@ -17,15 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Images\VendorImages\NintendoLogo.jpg" />
-    <None Include="wwwroot\Images\VendorImages\SonyLogo.png" />
-    <None Include="wwwroot\Images\VendorImages\XBoxLogo.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Data\Images\" />
-    <Folder Include="wwwroot\Images\SubcategoryImages\Random\" />
-    <Folder Include="wwwroot\Images\SubcategoryImages\Nintendo\" />
   </ItemGroup>
 
   <ItemGroup>

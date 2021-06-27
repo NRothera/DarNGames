@@ -43,21 +43,27 @@ namespace DarNGames.Pages.Products
             {
                 return Page();
             }
-            var files = Request.Form.Files;
 
-            var savePath = System.IO.Directory.GetCurrentDirectory() + "\\Data\\Nintento\\Test\\";
+            var files = Request.Form.Files;
+            var vendor = _context.GameVendors.Where(g => g.Id == gameVendorId).FirstOrDefault().VendorTitle;
+            var subcategory = _context.VendorSubcategories.Where(vendor => vendor.Id == subcategoryId).FirstOrDefault().Title;
+            var savePath = System.IO.Directory.GetCurrentDirectory() + @"\\wwwroot\\Images\\" + vendor + "\\" + subcategory + "\\";
             if (!System.IO.Directory.Exists(savePath))
             {
                 Directory.CreateDirectory(savePath);
             }
 
+            var fileName = String.Empty;
+            var filePath = String.Empty;
             var size = files.Sum(f => f.Length);
            foreach(var file in files)
             {
-                string untrustedFileName = Path.GetRandomFileName();
-                var pathToCheck = savePath + untrustedFileName;
+                fileName = Path.GetRandomFileName();
+                Console.WriteLine(fileName);
+                fileName = Path.ChangeExtension(fileName, ".jpg");
+                Console.WriteLine(fileName);
 
-                var filePath = Path.Combine(savePath, Path.GetRandomFileName());
+                filePath = Path.Combine(savePath, fileName);
 
                 using (var stream = System.IO.File.Create(filePath))
                 {
@@ -66,10 +72,9 @@ namespace DarNGames.Pages.Products
 
             }
 
-           
-
-
             Products.VendorSubcategoryId = SubcategoryId;
+            var fileImagePath = $"Images\\{vendor}\\{subcategory}\\{fileName}".Replace(" ", "%20");
+            Products.ImageLink = fileImagePath;
             _context.Products.Add(Products);
             await _context.SaveChangesAsync();
 

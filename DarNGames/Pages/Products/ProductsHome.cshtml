@@ -22,7 +22,7 @@
 <div class="row">
     <div class="col-md-4 col-sm-3">
         @Html.DisplayFor(modelItem => item.Title)
-        <img aria-label="VendorImageHomepage" class="img-fluid" src="@Url.Content("~/Images/SubcategoryImages/Random/" +  item.ImageLink + ".jpg")" style="" />
+        <img aria-label="VendorImageHomepage" class="img-fluid" src=@Url.Content("~/" + item.ImageLink) style="" />
         £@Html.DisplayFor(modelItem => item.Price)
     </div>
     <div class="col-md-4 col-sm-3">
@@ -31,7 +31,7 @@
 
     <div>
         <a asp-page="./Edit" asp-route-id="@item.Id"  asp-route-gameVendorId="@item.VendorSubcategoryId">Edit</a> |
-        <a asp-page="./Delete" asp-route-id="@item.Id" asp-route-gameVendorId="@item.VendorSubcategoryId">Delete</a>
+        <a asp-page="./Delete" asp-route-id="@item.Id" asp-route-subcategoyId ="@item.VendorSubcategoryId" asp-route-gameVendorId="@Model.Subcategory.GameVendorId">Delete</a>
     </div>
 </div>
 
