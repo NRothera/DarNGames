@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-md-4 col-sm-3">
                 @Html.DisplayFor(modelItem => item.VendorTitle)
-                <a asp-page="vendorsubcategories/index" asp-route-id="@item.Id"><img aria-label="VendorImageHomepage" class="img-fluid" src="@Url.Content("~/Images/VendorImages/" + item.ImageLink + ".jpg")" style="" /></a>
+                <a asp-page="vendorsubcategories/index" asp-route-id="@item.Id"><img aria-label="VendorImageHomepage" class="img-fluid" src=@Url.Content("~/" + item.ImageLink) style="" /></a>
             </div>
             <div>
                 <a asp-page="gamevendors/Edit" asp-route-id="@item.Id">Edit</a> |

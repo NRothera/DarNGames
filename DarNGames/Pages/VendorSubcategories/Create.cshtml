@@ -4,26 +4,30 @@
 @{
     ViewData["Title"] = "Create";
 }
-
+<head>
+    <link rel="stylesheet" href="~/css/upload.css">
+</head>
 <h1>Create</h1>
 
 <h4>VendorSubcategories</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="VendorSubcategories.ImageLink" class="control-label"></label>
-                <input asp-for="VendorSubcategories.ImageLink" class="form-control" />
-                <span asp-validation-for="VendorSubcategories.ImageLink" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="VendorSubcategories.Title" class="control-label"></label>
                 <input asp-for="VendorSubcategories.Title" class="form-control" />
                 <span asp-validation-for="VendorSubcategories.Title" class="text-danger"></span>
             </div>
-            
+            <div class="form-group">
+                <label>Images</label>
+                <div class="drop_zone">
+                    <span asp-validation-for="VendorSubcategories.ImageLink" class="text-danger"></span>
+                    <span class="drop_zone__prompt">Drag/Drop images here</span>
+                    <input type="file" asp-for="VendorSubcategories.ImageLink" id="imageUpload " name="myFile" class="drop_zone__input form-control-file" />
+                </div>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -38,3 +42,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script src="~/js/upload.js"></script>

@@ -53,7 +53,7 @@ namespace DarNGames.Pages.GameVendors
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Index");
         }
     }
 }
