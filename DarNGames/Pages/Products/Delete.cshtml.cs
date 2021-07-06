@@ -42,20 +42,21 @@ namespace DarNGames.Pages.Products
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id, int subcategoryId, int gameVendorId)
+        public async Task<IActionResult> OnPostAsync(int? id, int gameVendorId)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            SubcategoryId = subcategoryId;
-
-            var filePath = _context.Products.Where(p => p.Id == id).FirstOrDefault().ImageLink;
-
-            System.IO.File.Delete(System.IO.Directory.GetCurrentDirectory() + "\\wwwroot\\" + filePath.Replace("%20", " "));
-
             Products = await _context.Products.FindAsync(id);
+
+            var subcategory = _context.VendorSubcategories.Where(s => s.Id == Products.VendorSubcategoryId).FirstOrDefault();
+            var vendor = _context.GameVendors.Where(g => g.Id == gameVendorId).FirstOrDefault();
+
+
+            System.IO.File.Delete(System.IO.Directory.GetCurrentDirectory() + $"\\wwwroot\\Images\\" +
+                $"{vendor.VendorTitle}\\{subcategory.Title}\\{Products.ImageLink}");
+
 
             if (Products != null)
             {

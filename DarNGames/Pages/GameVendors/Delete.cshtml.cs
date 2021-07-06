@@ -21,6 +21,7 @@ namespace DarNGames.Pages.GameVendors
 
         [BindProperty]
         public Models.Vendors GameVendors { get; set; }
+        public Models.VendorSubcategories VendorSubcategories { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -45,10 +46,27 @@ namespace DarNGames.Pages.GameVendors
                 return NotFound();
             }
 
+
+            var allSubcategoriesUnderVendor = _context.VendorSubcategories.Where(x => x.GameVendorId == id).ToList();
             GameVendors = await _context.GameVendors.FindAsync(id);
 
             if (GameVendors != null)
             {
+                
+                foreach (var subCategory in allSubcategoriesUnderVendor)
+                {
+                    var productsInSubcategory = _context.Products.Where(x => x.VendorSubcategoryId == subCategory.Id).ToList();
+
+                    foreach (var product in productsInSubcategory)
+                    {
+                        System.IO.File.Delete(System.IO.Directory.GetCurrentDirectory() + $"\\wwwroot\\Images\\" +
+                         $"{GameVendors.VendorTitle}\\{subCategory.Title}\\{product.ImageLink}");
+
+                        _context.Products.Remove(product);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+
                 _context.GameVendors.Remove(GameVendors);
                 await _context.SaveChangesAsync();
             }

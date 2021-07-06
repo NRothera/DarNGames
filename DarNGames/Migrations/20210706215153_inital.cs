@@ -2,7 +2,7 @@
 
 namespace DarNGames.Migrations
 {
-    public partial class initialcreate : Migration
+    public partial class inital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,10 +10,10 @@ namespace DarNGames.Migrations
                 name: "GameVendors",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    VendorTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageLink = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    VendorTitle = table.Column<string>(nullable: true),
+                    ImageLink = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -24,11 +24,11 @@ namespace DarNGames.Migrations
                 name: "VendorSubcategories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ImageLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GameVendorId = table.Column<int>(type: "int", nullable: false)
+                    ImageLink = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    GameVendorId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,14 +39,14 @@ namespace DarNGames.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    ImageLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    VendorSubcategoryId = table.Column<int>(type: "int", nullable: false),
-                    VendorSubcategoriesId = table.Column<int>(type: "int", nullable: true)
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Price = table.Column<double>(nullable: false),
+                    ImageLink = table.Column<string>(nullable: true),
+                    VendorSubcategoryId = table.Column<int>(nullable: false),
+                    VendorSubcategoriesId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {

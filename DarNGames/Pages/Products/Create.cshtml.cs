@@ -73,8 +73,7 @@ namespace DarNGames.Pages.Products
             }
 
             Products.VendorSubcategoryId = SubcategoryId;
-            var fileImagePath = $"Images\\{vendor}\\{subcategory}\\{fileName}".Replace(" ", "%20");
-            Products.ImageLink = fileImagePath;
+            Products.ImageLink = fileName;
             _context.Products.Add(Products);
             await _context.SaveChangesAsync();
 

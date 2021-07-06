@@ -15,8 +15,8 @@ namespace DarNGames.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("ProductVersion", "3.1.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("DarNGames.Models.Products", b =>
@@ -96,8 +96,6 @@ namespace DarNGames.Migrations
                         .WithMany("CommonGameProperties")
                         .HasForeignKey("VendorSubcategoriesId");
                 });
-
-           
 #pragma warning restore 612, 618
         }
     }
