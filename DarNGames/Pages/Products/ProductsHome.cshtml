@@ -23,7 +23,7 @@
 <div class="row">
     <div class="col-md-4 col-sm-3">
         @Html.DisplayFor(modelItem => Model.Products[i].Title)
-        <img aria-label="VendorImageHomepage" class="img-fluid" src=@Url.Content("~/Images/" + Model.Vendor.VendorTitle.Replace(" ", "%20") + "/" + Model.Subcategory.Title.Replace(" ", "%20") + "/" + Model.Products[i].ImageLink) style="" />
+        <a asp-page="./ProductModel" asp-route-subcategoryId="@Model.Subcategory.Id" asp-route-gameVendorId="@Model.Subcategory.GameVendorId" asp-route-productId="@Model.Products[i].Id"><img aria-label="VendorImageHomepage" class="img-fluid" src=@Url.Content("~/Images/" + Model.Vendor.VendorTitle.Replace(" ", "%20") + "/" + Model.Subcategory.Title.Replace(" ", "%20") + "/" + Model.Products[i].ImageLink) style="" /></a>
         £@Html.DisplayFor(modelItem => Model.Products[i].Price)
     </div>
     <div class="col-md-4 col-sm-3">
