@@ -9,14 +9,15 @@
 
 <p>
 </p>
-<p>
-    <a asp-page="Create" asp-route-subcategoryId="@Model.Subcategory.Id" asp-route-gameVendorId="@Model.Subcategory.GameVendorId">Create New</a>
-</p>
+
 <div class="row">
     <div class="col-md-4 col-sm-3">
         <img src="@Url.Content("~/Images/" + Model.Vendor.VendorTitle + "/" + Model.Subcategory.Title.Replace(" ", "%20") + "/" + Model.Subcategory.ImageLink)" class="img-fluid" alt="Alternate Text" />
     </div>
 </div>
+<p>
+    <a asp-page="Create" asp-route-subcategoryId="@Model.Subcategory.Id" asp-route-gameVendorId="@Model.Subcategory.GameVendorId">Add item</a>
+</p>
 @for (var i = 0; i < Model.Products.Count; i++)
 {
 <div class="row">

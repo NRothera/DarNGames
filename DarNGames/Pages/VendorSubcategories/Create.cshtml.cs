@@ -38,32 +38,35 @@ namespace DarNGames.Pages.VendorSubcategories
             {
                 return Page();
             }
-            VendorSubcategories.GameVendorId = GameVendorId;
-            var gameVendor = _context.GameVendors.Where(g => g.Id == GameVendorId).FirstOrDefault().VendorTitle;
-
             var files = Request.Form.Files;
-            var savePath = System.IO.Directory.GetCurrentDirectory() + @"\\wwwroot\\Images\\" + gameVendor + "\\" + VendorSubcategories.Title + "\\";
+            var vendor = _context.GameVendors.Where(g => g.Id == gameVendorId).FirstOrDefault().VendorTitle;
+            
+            var savePath = System.IO.Directory.GetCurrentDirectory() + @"\\wwwroot\\Images\\" + vendor + "\\" + VendorSubcategories.Title;
             if (!System.IO.Directory.Exists(savePath))
             {
                 Directory.CreateDirectory(savePath);
             }
+
             var fileName = String.Empty;
             var filePath = String.Empty;
             var size = files.Sum(f => f.Length);
             foreach (var file in files)
             {
                 fileName = Path.GetRandomFileName();
+                Console.WriteLine(fileName);
                 fileName = Path.ChangeExtension(fileName, ".jpg");
+                Console.WriteLine(fileName);
+
                 filePath = Path.Combine(savePath, fileName);
 
                 using (var stream = System.IO.File.Create(filePath))
                 {
                     await file.CopyToAsync(stream);
                 }
-            }
-            var fileImagePath = $"Images\\{gameVendor}\\{fileName}".Replace(" ", "%20");
-            VendorSubcategories.ImageLink = fileImagePath;
 
+            }
+            VendorSubcategories.ImageLink = fileName;
+            VendorSubcategories.GameVendorId = gameVendorId;
             _context.VendorSubcategories.Add(VendorSubcategories);
             await _context.SaveChangesAsync();
 

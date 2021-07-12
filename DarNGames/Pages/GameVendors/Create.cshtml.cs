@@ -57,8 +57,7 @@ namespace DarNGames.Pages.GameVendors
                     await file.CopyToAsync(stream);
                 }
             }
-            var fileImagePath = $"Images\\{GameVendors.VendorTitle}\\{fileName}".Replace(" ", "%20");
-            GameVendors.ImageLink = fileImagePath;
+            GameVendors.ImageLink = fileName;
 
             await _context.GameVendors.AddAsync(GameVendors);
             await _context.SaveChangesAsync();

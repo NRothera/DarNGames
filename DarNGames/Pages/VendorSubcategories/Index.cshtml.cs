@@ -21,6 +21,8 @@ namespace DarNGames.Pages.VendorSubcategories
         }
         public int Id { get; set; }
         public VendorAndSubcategory VendorAndSubcategory { get; set; }
+        public DarNGames.Models.Vendors Vendor { get; set; }
+        public Models.VendorSubcategories Subcategory { get; set; }
 
         public async Task OnGetAsync(int id)
         {

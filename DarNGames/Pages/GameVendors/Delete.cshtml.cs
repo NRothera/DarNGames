@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DarNGames.Data;
 using DarNGames.Models;
+using System.IO;
 
 namespace DarNGames.Pages.GameVendors
 {
@@ -52,23 +53,32 @@ namespace DarNGames.Pages.GameVendors
 
             if (GameVendors != null)
             {
-                
+                var currentDirectory = System.IO.Directory.GetCurrentDirectory();
+
                 foreach (var subCategory in allSubcategoriesUnderVendor)
                 {
                     var productsInSubcategory = _context.Products.Where(x => x.VendorSubcategoryId == subCategory.Id).ToList();
-
                     foreach (var product in productsInSubcategory)
                     {
-                        System.IO.File.Delete(System.IO.Directory.GetCurrentDirectory() + $"\\wwwroot\\Images\\" +
-                         $"{GameVendors.VendorTitle}\\{subCategory.Title}\\{product.ImageLink}");
-
                         _context.Products.Remove(product);
                         await _context.SaveChangesAsync();
                     }
+                    _context.VendorSubcategories.Remove(subCategory);
+                    await _context.SaveChangesAsync();
                 }
-
+               
                 _context.GameVendors.Remove(GameVendors);
                 await _context.SaveChangesAsync();
+
+                System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(currentDirectory + $"\\wwwroot\\Images\\{GameVendors.VendorTitle}");
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+                foreach (DirectoryInfo dir in di.GetDirectories())
+                {
+                    dir.Delete(true);
+                }
             }
 
             return RedirectToPage("../Index");

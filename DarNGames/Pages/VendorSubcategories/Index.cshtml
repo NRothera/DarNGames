@@ -10,23 +10,24 @@
     </div>
   </div>
 
-    <p>
-        <a asp-page="Create" asp-route-gameVendorId="@Model.VendorAndSubcategory.GameVendor.Id">Create New</a>
-    </p>
-        <div class="row">
-            <div class="col-md-4 col-sm-3">
-                <img src=@Url.Content("~/" + Model.VendorAndSubcategory.GameVendor.ImageLink) class="img-fluid" alt="Alternate Text" />
-                </div>
+    
+    <div class="row">
+        <div class="col-md-4 col-sm-3">
+            <img src=@Url.Content("~/Images/" + Model.VendorAndSubcategory.GameVendor.VendorTitle.Replace(" ", "%20") + "/" +  Model.VendorAndSubcategory.GameVendor.ImageLink) class="img-fluid" alt="Alternate Text" />
             </div>
+        </div>
+        <p>
+            <a asp-page="Create" asp-route-gameVendorId="@Model.VendorAndSubcategory.GameVendor.Id">Create New Subcategory</a>
+        </p>
             @foreach (var item in Model.VendorAndSubcategory.VendorSubcategory)
             {
                 <div class="row">
                     <div class="col-md-4 col-sm-3">
                         @Html.DisplayFor(modelItem => item.Title)
-                        <a asp-page="../products/ProductsHome" asp-route-id="@item.Id" asp-route-gameVendorId="@item.GameVendorId"><img aria-label="VendorImageHomepage" class="img-fluid" src=@Url.Content("~/" + item.ImageLink) style="" /></a>
+                        <a asp-page="../products/ProductsHome" asp-route-id="@item.Id" asp-route-gameVendorId="@item.GameVendorId"><img aria-label="VendorImageHomepage" class="img-fluid" src=@Url.Content("~/Images/" + Model.VendorAndSubcategory.GameVendor.VendorTitle.Replace(" ", "%20") + "/" + item.Title.Replace(" ", "%20") + "/" + item.ImageLink) style="" /></a>
                     </div>
-                    <div>
                         <a asp-page="./Edit" asp-route-id="@item.Id" asp-route-gameVendorId="@item.GameVendorId">Edit</a> |
+                    <div>
                         <a asp-page="./Delete" asp-route-id="@item.Id" asp-route-gameVendorId="@item.GameVendorId">Delete</a>
                     </div>
                 </div>

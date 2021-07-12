@@ -11,7 +11,7 @@
 <div class="container">
 
     <p>
-        <a asp-page="./GameVendors/Create">Create New</a>
+        <a asp-page="./GameVendors/Create">Create New Vendor</a>
     </p>
     @foreach (var item in Model.GameVendors)
     {
@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-md-4 col-sm-3">
                 @Html.DisplayFor(modelItem => item.VendorTitle)
-                <a asp-page="vendorsubcategories/index" asp-route-id="@item.Id"><img aria-label="VendorImageHomepage" class="img-fluid" src=@Url.Content("~/" + item.ImageLink) style="" /></a>
+                <a asp-page="vendorsubcategories/index" asp-route-id="@item.Id"><img aria-label="VendorImageHomepage" class="img-fluid" src=@Url.Content("~/Images/" + item.VendorTitle.Replace(" ", "%20") + "/" + item.ImageLink) style="" /></a>
             </div>
             <div>
                 <a asp-page="gamevendors/Edit" asp-route-id="@item.Id">Edit</a> |
@@ -27,6 +27,6 @@
                 <a asp-page="gamevendors/Delete" asp-route-id="@item.Id">Delete</a>
             </div>
         </div>
-    };
+    }
 </div>
 

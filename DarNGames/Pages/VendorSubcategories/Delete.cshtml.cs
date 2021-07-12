@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DarNGames.Data;
 using DarNGames.Models;
+using System.IO;
 
 namespace DarNGames.Pages.VendorSubcategories
 {
@@ -45,17 +46,36 @@ namespace DarNGames.Pages.VendorSubcategories
             {
                 return NotFound();
             }
-
+            var gameVendor = await  _context.GameVendors.FindAsync(gameVendorId);
             GameVendorId = gameVendorId;
             VendorSubcategories = await _context.VendorSubcategories.FindAsync(id);
 
             if (VendorSubcategories != null)
             {
+                var currentDirectory = System.IO.Directory.GetCurrentDirectory();
+
+                var productsInSubcategory = _context.Products.Where(x => x.VendorSubcategoryId == VendorSubcategories.Id).ToList();
+                foreach (var product in productsInSubcategory)
+                {
+                    _context.Products.Remove(product);
+                    await _context.SaveChangesAsync();
+                }
                 _context.VendorSubcategories.Remove(VendorSubcategories);
                 await _context.SaveChangesAsync();
+
+                System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(currentDirectory + $"\\wwwroot\\Images\\{gameVendor.VendorTitle}\\{VendorSubcategories.Title}");
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+                foreach (DirectoryInfo dir in di.GetDirectories())
+                {
+                    dir.Delete(true);
+                }
             }
 
             return Redirect($"./{GameVendorId}");
         }
+
     }
 }
