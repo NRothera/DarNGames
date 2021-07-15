@@ -19,11 +19,13 @@ namespace DarNGames.Pages.Products
 
         [BindProperty]
         public Models.Products Product { get; set; }
-
+        public Models.VendorSubcategories VendorSubcategory { get; set; }
+        public Models.Vendors Vendor { get; set; }
         public void OnGet(int productId)
         {
             Product =  _context.Products.Find(productId);
-            
+            VendorSubcategory = _context.VendorSubcategories.Find(Product.VendorSubcategoryId);
+            Vendor = _context.GameVendors.Find(VendorSubcategory.GameVendorId);
         }
     }
 }
