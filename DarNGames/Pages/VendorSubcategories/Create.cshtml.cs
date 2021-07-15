@@ -50,8 +50,13 @@ namespace DarNGames.Pages.VendorSubcategories
             var fileName = String.Empty;
             var filePath = String.Empty;
             var size = files.Sum(f => f.Length);
+            var imageLinkString = "";
             foreach (var file in files)
             {
+                if (imageLinkString != "")
+                {
+                    imageLinkString = imageLinkString + ",";
+                }
                 fileName = Path.GetRandomFileName();
                 Console.WriteLine(fileName);
                 fileName = Path.ChangeExtension(fileName, ".jpg");
@@ -63,9 +68,10 @@ namespace DarNGames.Pages.VendorSubcategories
                 {
                     await file.CopyToAsync(stream);
                 }
+                imageLinkString = imageLinkString + fileName;
 
             }
-            VendorSubcategories.ImageLink = fileName;
+            VendorSubcategories.ImageLink = imageLinkString;
             VendorSubcategories.GameVendorId = gameVendorId;
             _context.VendorSubcategories.Add(VendorSubcategories);
             await _context.SaveChangesAsync();

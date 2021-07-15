@@ -21,11 +21,14 @@ namespace DarNGames.Pages.Products
         public Models.Products Product { get; set; }
         public Models.VendorSubcategories VendorSubcategory { get; set; }
         public Models.Vendors Vendor { get; set; }
+        public string[] Images { get; set; }
         public void OnGet(int productId)
         {
             Product =  _context.Products.Find(productId);
             VendorSubcategory = _context.VendorSubcategories.Find(Product.VendorSubcategoryId);
             Vendor = _context.GameVendors.Find(VendorSubcategory.GameVendorId);
+
+            Images = Product.ImageLink.Split(",");
         }
     }
 }

@@ -56,8 +56,13 @@ namespace DarNGames.Pages.Products
             var fileName = String.Empty;
             var filePath = String.Empty;
             var size = files.Sum(f => f.Length);
-           foreach(var file in files)
+            var imageLinkString = "";
+           foreach (var file in files)
             {
+                if (imageLinkString != "")
+                {
+                    imageLinkString = imageLinkString + ",";
+                }
                 fileName = Path.GetRandomFileName();
                 Console.WriteLine(fileName);
                 fileName = Path.ChangeExtension(fileName, ".jpg");
@@ -69,11 +74,11 @@ namespace DarNGames.Pages.Products
                 {
                     await file.CopyToAsync(stream);
                 }
-
+                imageLinkString = imageLinkString + fileName;
             }
 
             Products.VendorSubcategoryId = SubcategoryId;
-            Products.ImageLink = fileName;
+            Products.ImageLink = imageLinkString;
             _context.Products.Add(Products);
             await _context.SaveChangesAsync();
 

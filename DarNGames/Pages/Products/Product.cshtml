@@ -24,7 +24,10 @@
             <p>@Model.Product.Price</p>
         </dt>
         <dd class="col-sm-10">
-            <img aria-label="VendorImageHomepage" class="img-fluid" src=@Url.Content("~/Images/" + Model.Vendor.VendorTitle.Replace(" ", "%20") + "/" + Model.VendorSubcategory.Title.Replace(" ", "%20") + "/" + Model.Product.ImageLink) style="" />
+            @foreach (var image in @Model.Images)
+            {
+                <img aria-label="VendorImageHomepage" class="img-fluid" src=@Url.Content("~/Images/" + Model.Vendor.VendorTitle.Replace(" ", "%20") + "/" + Model.VendorSubcategory.Title.Replace(" ", "%20") + "/" + image) style="" />
+            }
         </dd>
 
     </dl>
