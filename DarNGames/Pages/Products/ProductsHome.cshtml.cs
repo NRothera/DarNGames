@@ -28,8 +28,6 @@ namespace DarNGames.Pages.Products
             Subcategory = (from s in _context.VendorSubcategories where s.Id.Equals(id) select s).FirstOrDefault();
             Products = (from x in _context.Products where x.VendorSubcategoryId.Equals(id) select x).ToList();
             Vendor = (from g in _context.GameVendors where g.Id.Equals(Subcategory.GameVendorId) select g).FirstOrDefault();
-
-
         }
 
       

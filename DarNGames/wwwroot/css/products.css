@@ -1,0 +1,43 @@
+﻿div.productsContainer {
+    width: 500px;
+    height: 500px;
+    border: solid;
+    border-color: black;
+    padding: 0px 0px 0px 0px;
+    background-color: #F2F3F5;
+}
+
+#firstImage {
+    width: 500px;
+    height: 300px;
+    object-fit: contain;
+    border: solid;
+    border-color: azure;
+}
+
+img.underProduct {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border: solid;
+    border-color: black;
+    float: left;
+    padding: 0px 0px 0px 0px;
+}
+
+img.productList {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    border: ridge;
+    object-fit: contain;
+}
+
+[itemid="primaryImage"] {
+    
+}
+
+#description{
+    border: solid;
+    background-color: grey;
+}

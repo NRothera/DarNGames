@@ -82,7 +82,7 @@ namespace DarNGames.Pages.Products
             _context.Products.Add(Products);
             await _context.SaveChangesAsync();
 
-            return Redirect($"/Products/ProductsHome/{SubcategoryId}/{gameVendorId}");
+            return Redirect($"/Products/Product/{SubcategoryId}/{gameVendorId}/{Products.Id}");
         }
 
 

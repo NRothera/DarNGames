@@ -4,31 +4,53 @@
 @{
     ViewData["Title"] = "Product";
 }
-
+<head>
+    <link rel="stylesheet" href="~/css/products.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/bootstrap-grid.css">
+</head>
 
 <div>
-    <h2>Product</h2>
+    <p class="display-1">@Model.Product.Title</p>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Description)
-            <p>@Model.Product.Description</p>
-        </dt>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Price)
-            <p>@Model.Product.Price</p>
-        </dt>
-        <dd class="col-sm-10">
-            @foreach (var image in @Model.Images)
-            {
-                <img aria-label="VendorImageHomepage" class="img-fluid" src=@Url.Content("~/Images/" + Model.Vendor.VendorTitle.Replace(" ", "%20") + "/" + Model.VendorSubcategory.Title.Replace(" ", "%20") + "/" + image) style="" />
-            }
-        </dd>
+    <div class="float-left productsContainer">
+        <img aria-label="First Image" id="firstImage" class="span3" src=@Url.Content("~/Images/" + Model.Vendor.VendorTitle.Replace(" ", "%20") + "/" + Model.VendorSubcategory.Title.Replace(" ", "%20") + "/" + Model.Images[Model.FocusedImage]) style=" /">
+        <div>
+            <div class="col-sm-10 subImages">
 
-    </dl>
+                @if (Model.Images.Length > 0)
+            {
+                @for (@Model.FocusedImage = 0; @Model.FocusedImage < Model.Images.Length; @Model.FocusedImage++)
+                    {
+                    <button class="btn btn-default" type="button" onclick="ChangeImage" asp-route-index="@Model.FocusedImage">
+                        <img aria-label="Product Images" class="img-fluid underProduct" src=@Url.Content("~/Images/" + Model.Vendor.VendorTitle.Replace(" ", "%20") + "/" + Model.VendorSubcategory.Title.Replace(" ", "%20") + "/" + Model.Images[@Model.FocusedImage]) style="" />
+                    </button>
+                    }
+            }
+            </div>
+
+        </div>
+
     </div>
+</div>
+
+<div>
+    <div class="col-sm-2">
+        <div class="col-sm-2">
+            <p class="display-3">Price</p>
+            <p class="display-4">£@Model.Product.Price</p>
+        </div>
+        <p id="description">@Model.Product.Description</p>
+    </div>
+</div>
+
+
+<script src="Bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script>
+    this.OnClick = new function (var index) {
+        let firstImage = document.getElementById("firstImage")
+
+    }
+</script>
+

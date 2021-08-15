@@ -17,6 +17,7 @@ namespace DarNGames.Data
         public DbSet<DarNGames.Models.Vendors> GameVendors { get; set; }
         public DbSet<DarNGames.Models.VendorSubcategories> VendorSubcategories { get; set; }
         public DbSet<DarNGames.Models.Products> Products { get; set; }
+        public DbSet<DarNGames.Models.Profile> Profile { get; set; }
 
     }
 }

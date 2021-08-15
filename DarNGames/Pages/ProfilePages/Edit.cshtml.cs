@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using DarNGames.Data;
 using DarNGames.Models;
 
-namespace DarNGames.Pages.Products
+namespace DarNGames.Pages.ProfilePages
 {
     public class EditModel : PageModel
     {
@@ -21,34 +21,34 @@ namespace DarNGames.Pages.Products
         }
 
         [BindProperty]
-        public DarNGames.Models.Products Products { get; set; }
+        public Profile Profile { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Products = await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
+            Profile = await _context.Profile.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Products == null)
+            if (Profile == null)
             {
                 return NotFound();
             }
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(int id, int gameVendorId)
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see https://aka.ms/RazorPagesCRUD.
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Products).State = EntityState.Modified;
+            _context.Attach(Profile).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +56,7 @@ namespace DarNGames.Pages.Products
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductsExists(Products.Id))
+                if (!ProfileExists(Profile.Id))
                 {
                     return NotFound();
                 }
@@ -66,12 +66,12 @@ namespace DarNGames.Pages.Products
                 }
             }
 
-            return Redirect($"/Products/ProductsHome/{id}/{gameVendorId}");
+            return RedirectToPage("./Index");
         }
 
-        private bool ProductsExists(int id)
+        private bool ProfileExists(Guid id)
         {
-            return _context.Products.Any(e => e.Id == id);
+            return _context.Profile.Any(e => e.Id == id);
         }
     }
 }

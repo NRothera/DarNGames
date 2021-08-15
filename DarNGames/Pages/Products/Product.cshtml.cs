@@ -22,13 +22,20 @@ namespace DarNGames.Pages.Products
         public Models.VendorSubcategories VendorSubcategory { get; set; }
         public Models.Vendors Vendor { get; set; }
         public string[] Images { get; set; }
+        public int FocusedImage { get; set; }
+
         public void OnGet(int productId)
         {
             Product =  _context.Products.Find(productId);
             VendorSubcategory = _context.VendorSubcategories.Find(Product.VendorSubcategoryId);
             Vendor = _context.GameVendors.Find(VendorSubcategory.GameVendorId);
-
+            FocusedImage = 0;
             Images = Product.ImageLink.Split(",");
+        }
+
+        public void ChangeImage(int index)
+        {
+            FocusedImage = index;
         }
     }
 }

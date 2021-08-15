@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using DarNGames.Data;
 
 namespace DarNGames
@@ -26,7 +27,7 @@ namespace DarNGames
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-
+            services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddDbContext<DarNGamesContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DarNGamesContext")));
         }
