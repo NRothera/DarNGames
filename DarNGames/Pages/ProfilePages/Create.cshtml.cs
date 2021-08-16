@@ -36,6 +36,8 @@ namespace DarNGames.Pages.ProfilePages
             {
                 return Page();
             }
+
+
             var options = new HashingOptions();
             options.Iterations = 10000;
             passwordHasher = new PasswordHasher(options);
@@ -46,7 +48,7 @@ namespace DarNGames.Pages.ProfilePages
             _context.Profile.Add(Profile);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage($"./Index/{Profile.Id}");
         }
     }
 }

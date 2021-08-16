@@ -10,20 +10,20 @@ using DarNGames.Models;
 
 namespace DarNGames.Pages.ProfilePages
 {
-    public class IndexModel : PageModel
+    public class ProfilePage : PageModel
     {
         private readonly DarNGames.Data.DarNGamesContext _context;
 
-        public IndexModel(DarNGames.Data.DarNGamesContext context)
+        public ProfilePage(DarNGames.Data.DarNGamesContext context)
         {
             _context = context;
         }
 
-        public IList<Profile> Profile { get;set; }
+        public Profile Profile { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(Guid profileId)
         {
-            Profile = await _context.Profile.ToListAsync();
+            Profile =  _context.Profile.FirstOrDefault(p => p.Id == profileId);
         }
     }
 }

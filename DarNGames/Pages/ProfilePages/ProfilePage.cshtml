@@ -1,0 +1,72 @@
+﻿@page "{profileId}"
+@model DarNGames.Pages.ProfilePages.ProfilePage
+
+@{
+    ViewData["Title"] = "Index";
+}
+<head>
+    <link rel="stylesheet" href="~/css/ProfilePage.css">
+</head>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <div class="profile-nav col-md-3">
+            <div class="panel">
+                <div class="user-heading round">
+                    <a href="#">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                    </a>
+                    <h1>@Model.Profile.FirstName @Model.Profile.Surname</h1>
+                    <p>@Model.Profile.Email</p>
+                </div>
+
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="profile-info col-md-9">
+            <div class="panel">
+                <footer class="panel-footer">
+                    <button class="btn btn-warning pull-right">Post</button>
+                    <ul class="nav nav-pills">
+                        <li>
+                            <a href="#"><i class="fa fa-map-marker"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-camera"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class=" fa fa-film"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-microphone"></i></a>
+                        </li>
+                    </ul>
+                </footer>
+            </div>
+            <div class="panel">
+                <div class="bio-graph-heading">
+                    Aliquam ac magna metus. Nam sed arcu non tellus fringilla fringilla ut vel ispum. Aliquam ac magna metus.
+                </div>
+                <div class="panel-body bio-graph-info">
+                    <h1>Bio Graph</h1>
+                    <div class="row">
+                        <div class="bio-row">
+                            <p><span>First Name </span>: @Model.Profile.FirstName</p>
+                        </div>
+                        <div class="bio-row">
+                            <p><span>Last Name </span>: @Model.Profile.Surname</p>
+                        </div>
+                        <div class="bio-row">
+                            <p><span>Country </span>: @Model.Profile.Country</p>
+                        </div>
+                        <div class="bio-row">
+                            <p><span>Email </span>: @Model.Profile.Email</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
