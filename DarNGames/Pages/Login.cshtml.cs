@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using DarNGames.HelperMethods;
@@ -11,8 +12,11 @@ namespace DarNGames.Pages
 {
     public class LoginModel : PageModel
     {
-        [BindProperty]
         public Profile Profile { get; set; }
+        [BindProperty, Required, EmailAddress, Compare(nameof(LoginModel.Profile.Email), ErrorMessage ="Sorry your email or password was incorrect")]
+        public string Email { get; set; }
+        [BindProperty, Required, Compare(nameof(LoginModel.Profile.Password), ErrorMessage = "Sorry your email or password was incorrect")]
+        public string Password { get; set; }
 
         private readonly DarNGames.Data.DarNGamesContext _context;
 
@@ -34,12 +38,27 @@ namespace DarNGames.Pages
             {
                 Iterations = 10000
             };
+            Profile = _context.Profile.FirstOrDefault(p => p.Email == Email);
+            if (Profile != null)
+            {
+                
+                var passwordHasher = new PasswordHasher(options);
+                var isCorrectPassword = passwordHasher.Check(Profile.Password, Password);
 
-            Profile = _context.Profile.FirstOrDefault(p => p.Email == Profile.Email);
-            var passwordHasher = new PasswordHasher(options);
-            var isCorrectPassword = passwordHasher.Check(Profile.Password, Profile.Password);
-
-            return Redirect($"./ProfilePages/ProfilePage/{Profile.Id}");
+                if (isCorrectPassword.Verified)
+                {
+                    return Redirect($"./ProfilePages/ProfilePage/{Profile.Id}");
+                }
+                else
+                {
+                    Console.WriteLine(ModelState);
+                    return Page();
+                   
+                }
+            }
+            Console.WriteLine(ModelState);
+            return Page();
+           
 
 
         }
