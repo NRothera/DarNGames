@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Images\" />
-    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\Images\Sony\" />
   </ItemGroup>
 

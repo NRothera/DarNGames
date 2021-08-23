@@ -13,6 +13,7 @@ namespace DarNGames.Models
         public double Price { get; set; }
         public string ImageLink { get; set; }
         public int VendorSubcategoryId { get; set; }
+        public Guid ProfileId { get; set; }
 
     }
 }

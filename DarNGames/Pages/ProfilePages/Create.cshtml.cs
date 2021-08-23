@@ -48,7 +48,7 @@ namespace DarNGames.Pages.ProfilePages
             _context.Profile.Add(Profile);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage($"./Index/{Profile.Id}");
+            return Redirect($"/ProfilePages/ProfilePage/{Profile.Id}");
         }
     }
 }
