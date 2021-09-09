@@ -41,6 +41,7 @@
  * @param {File} file
  */
 function updateThumbnail(dropZoneElement, file) {
+
     let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
 
     // First time - remove the prompt
@@ -55,21 +56,37 @@ function updateThumbnail(dropZoneElement, file) {
         dropZoneElement.appendChild(thumbnailElement);
     }
 
-    thumbnailElement.dataset.label = file.name;
+     var fileInput = document.getElementById("imageUpload");
+   
+     var files = fileInput.files;
+    for (var i = 0; i < files.length; i++) {
+        var newImage = document.createElement("img");
+        var dropZone = document.querySelector("#imageZone");
 
-    // Show thumbnail for image files
-    if (file.type.startsWith("image/")) {
-        const reader = new FileReader();
+         thumbnailElement.dataset.label = files[i].name;
 
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
-            const dropZoneElement = document.getElementById("imageUpload");
+         // Show thumbnail for image files
+         if (files[i].type.startsWith("image/")) {
+             const reader = new FileReader();
+             var temp = files[i];
+             reader.readAsDataURL(temp);
+             reader.onload = (e) => {
+                 reader.readAsDataURL(temp);
+                 thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+                 const dropZoneElement = document.getElementById("imageUpload");
+                 newImage.src = reader.result;
+                 dropZone.appendChild(newImage);
+                 dropZoneElement.setAttribute('value', reader.result);
+                 console.log(reader.result)
+             };
+         } else {
+             thumbnailElement.style.backgroundImage = null;
+         }
+     }
+    
 
-            dropZoneElement.setAttribute('value', reader.result);
-            console.log(reader.result)
-        };
-    } else {
-        thumbnailElement.style.backgroundImage = null;
-    }
+    
 }
+
+    
+

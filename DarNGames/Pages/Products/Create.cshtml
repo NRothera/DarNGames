@@ -32,12 +32,12 @@
                 <textarea asp-for="Products.Description" rows="4" cols="50" class="form-control"></textarea>
                 <span asp-validation-for="Products.Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="imageZone">
                 <label>Images</label>
-                <div class="drop_zone">
+                <div class="drop_zone" >
                     <span asp-validation-for="Products.ImageLink" class="text-danger"></span>
                     <span class="drop_zone__prompt">Drag/Drop images here</span>
-                    <input type="file" asp-for="Products.ImageLink" id="imageUpload " name="myFile" class="drop_zone__input form-control-file" />
+                    <input type="file" asp-for="Products.ImageLink" id="imageUpload" name="myFile" class="drop_zone__input form-control-file" multiple/>
                 </div>
             </div>
 
